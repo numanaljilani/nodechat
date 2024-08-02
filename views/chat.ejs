@@ -14,7 +14,7 @@
         <!-- Message container -->
         <div class="msg-page" id="messages">
           <% messages.forEach((msg) => { %>
-            <% if (msg.userId == 1) { %>
+            <% if (msg.userId == 2) { %>
                 <div class="received-chats">
                     <div class="received-msg">
                         <div class="received-msg-inbox">
@@ -99,7 +99,7 @@
   socket.on('chat message', (msg) => {
     const item = document.createElement('div');
     item.className = `message`;
-    item.innerHTML = msg.userId == 1 ?`          <div class="received-chats">
+    item.innerHTML = msg.userId == 2 ?`          <div class="received-chats">
             <div class="received-msg">
               <div class="received-msg-inbox">
                 <p>
