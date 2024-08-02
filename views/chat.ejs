@@ -1,0 +1,130 @@
+<%- include('partials/header') %>
+<!-- <div class="chat-container"> -->
+<div class="container">
+  <div class="msg-header" style="  text-align: center;display : flex; justify-content: center; align-items: center;">
+    <div class="container1" style="display:flex;  justify-content: center;align-items: center;">
+      <div class="active">
+        <p>Welcome, <%= username %></p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-page">
+    <div class="msg-inbox">
+      <div class="chats">
+        <!-- Message container -->
+        <div class="msg-page" id="messages">
+          <% messages.forEach((msg) => { %>
+            <% if (msg.userId == 1) { %>
+                <div class="received-chats">
+                    <div class="received-msg">
+                        <div class="received-msg-inbox">
+                            <p>
+                                <%= msg.message %>
+                                <br>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString() %></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="outgoing-chats">
+                    <div class="outgoing-msg">
+                        <div class="outgoing-chats-msg">
+                            <p class="multi-msg">
+                                <%= msg.message %>
+                                <br>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString() %></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+        
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="msg-bottom"  >
+    <div class="input-group"  >
+      <form action="" id="form" style=" flex: 1;padding: 0px 10px 0px 20px;">
+        <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem;"  placeholder="Write message..." />
+        <button style="padding: 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem;">Send</button>
+      </form>
+
+
+      <!-- <span class="input-group-text send-icon">
+                <i class="bi bi-send"></i>
+              </span> -->
+
+    </div>
+  </div>
+  <!-- <h2>Welcome, <%= username %></h2> -->
+  <!-- <div id="messages"></div> -->
+  <!-- <form id="form" action="">
+        <input id="input" autocomplete="off" 
+        style="width: 80%; padding: 10px; border: none; border-radius: 5px; background-color: #252525; color: #fff;">
+        <button
+        style="padding: 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: large; margin: 4px;">Send</button>
+    </form> -->
+  <!-- </div> -->
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value) {
+      socket.emit('chat message', {
+        username: '<%= username %>',
+        message: input.value
+      });
+      input.value = '';
+    }
+  });
+
+  // socket.on('chat message', (msg) => {
+  //     const item = document.createElement('li');
+  //     item.textContent = msg.message;
+  //     messages.appendChild(item);
+  //     window.scrollTo(0, document.body.scrollHeight);
+  // });
+  socket.on('chat message', (msg) => {
+    const item = document.createElement('div');
+    item.className = `message`;
+    item.innerHTML = msg.userId == 1 ?`          <div class="received-chats">
+            <div class="received-msg">
+              <div class="received-msg-inbox">
+                <p>
+                ${msg.message}
+                <br>
+                <span class="time">${new Date(msg.createdAt).toLocaleTimeString()}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+`:`    <div class="outgoing-chats">
+            <div class="outgoing-msg">
+              <div class="outgoing-chats-msg">
+                <p class="multi-msg">
+                  ${msg.message}
+                  <br>
+                  <span class="time">${new Date(msg.createdAt).toLocaleTimeString()} </span>
+                </p>
+              </div>
+            </div>
+          </div>`
+    // item.innerHTML = `<div><strong>${msg.userId}</strong>: ${msg.message} <span style="font-size: 0.8em; color: #ccc;">(${new Date(msg.createdAt).toLocaleTimeString()})</span></div>`;
+    const messages = document.getElementById('messages');
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
+  });
+</script>
+<%- include('partials/footer') %>
