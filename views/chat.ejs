@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 <!-- <div class="chat-container"> -->
-<div class="container">
+<div class="container" style="background-color: 	#132749;">
   <!-- <div class="msg-header" style="  text-align: center;display : flex; justify-content: center; align-items: center;">
     <div class="container1" style="display:flex;  justify-content: center;align-items: center;">
       <div class="active">
@@ -8,66 +8,60 @@
       </div>
     </div>
   </div> -->
-  <div class="chat-page">
-    <div class="msg-inbox" style="border: 1px solid green;">
+  <div class="chat-page" >
+    <div class="msg-inbox" style="margin-bottom: 0px;">
       <div class="chats">
         <!-- Message container -->
-        <div class="msg-page"  id="messages">
+        <div class="msg-page" id="messages">
           <% messages.forEach((msg) => { %>
-            <% if (msg.userId == 2) { %>
-                <div class="received-chats">
-                    <div class="received-msg">
-                        <div class="received-msg-inbox">
-                            <p>
-                                <%= msg.message %>
-                                <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
+          <% if (msg.userId == 2) { %>
+          <div class="received-chats">
+            <div class="received-msg">
+              <div class="received-msg-inbox">
+                <p>
+                  <%= msg.message %>
+                  <br>
+                  <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
                 timeZone: 'Asia/Kolkata',
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric'
             }) %></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            <% } else { %>
-                <div class="outgoing-chats">
-                    <div class="outgoing-msg">
-                        <div class="outgoing-chats-msg">
-                            <p class="multi-msg">
-                                <%= msg.message %>
-                                <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
+                </p>
+              </div>
+            </div>
+          </div>
+          <% } else { %>
+          <div class="outgoing-chats">
+            <div class="outgoing-msg">
+              <div class="outgoing-chats-msg">
+                <p class="multi-msg">
+                  <%= msg.message %>
+                  <br>
+                  <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
                 timeZone: 'Asia/Kolkata',
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric'
             }) %></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
-        <% }) %>
-        
-        
+                </p>
+              </div>
+            </div>
+          </div>
+          <% } %>
+          <% }) %>
+
+
 
         </div>
       </div>
     </div>
   </div>
-  <div class="msg-bottom"  style="position: sticky; bottom: 60px; width: 100%; padding: 0px 5px 5px 0px; overflow: hidden;">
-    <div class="input-group"  >
-      <form action="" id="form" style=" flex: 1;padding: 0px 10px 0px 20px; overflow: hidden;">
-        <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem; padding: 5px 0px 5px 5px;"  placeholder="Write message..." />
-        <button style="padding: 10px 20px 10px 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem;">Send</button>
+  <div class="msg-bottom" style="position: sticky; bottom: 0px; width: 100%;height: 70px; padding: 0px 10px 0px 10px; ">
+    <div class="input-group">
+      <form action="" id="form" style=" flex: 1;padding: 0px 0px 0px 0px;border: 1px solid white;">
+        <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem; padding: 0px 0px 0px 10px;" placeholder="Write message..." />
+        <button style="padding: 15px 30px 15px 30px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem; border-radius: 40px;">Send</button>
       </form>
 
 
@@ -115,7 +109,7 @@
   socket.on('chat message', (msg) => {
     const item = document.createElement('div');
     item.className = `message`;
-    item.innerHTML = msg.userId == 2 ?`          <div class="received-chats">
+    item.innerHTML = msg.userId == 2 ? `          <div class="received-chats">
             <div class="received-msg">
               <div class="received-msg-inbox">
                 <p>
@@ -123,9 +117,6 @@
                 <br>
                 <span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US',{
                 timeZone: 'Asia/Kolkata',
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric'
@@ -134,13 +125,18 @@
               </div>
             </div>
           </div>
-`:`    <div class="outgoing-chats">
+` : `    <div class="outgoing-chats">
             <div class="outgoing-msg">
               <div class="outgoing-chats-msg">
                 <p class="multi-msg">
                   ${msg.message}
                   <br>
-                  <span class="time">${new Date(msg.createdAt).toLocaleTimeString()} </span>
+                  <span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US',{
+                timeZone: 'Asia/Kolkata',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            })} </span>
                 </p>
               </div>
             </div>
