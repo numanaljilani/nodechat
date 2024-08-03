@@ -62,11 +62,11 @@ app.post("/auth", async (req, res) => {
       res.send("Incorrect Username and/or Password!");
     }
   } catch (error) {}
-});
+})
 
 app.get("/chat", async(req, res) => {
   if (req.session.loggedin) {
-    const messages = await Message.find().limit(20)
+    const messages = await (await Message.find().limit(20).sort({createdAt : -1})).reverse()
     res.render("chat", {
       username: req.session.username,
       userId: req.session.userId,

@@ -1,18 +1,18 @@
 <%- include('partials/header') %>
 <!-- <div class="chat-container"> -->
 <div class="container">
-  <div class="msg-header" style="  text-align: center;display : flex; justify-content: center; align-items: center;">
+  <!-- <div class="msg-header" style="  text-align: center;display : flex; justify-content: center; align-items: center;">
     <div class="container1" style="display:flex;  justify-content: center;align-items: center;">
       <div class="active">
         <p>Welcome, <%= username %></p>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="chat-page">
-    <div class="msg-inbox">
+    <div class="msg-inbox" style="border: 1px solid green;">
       <div class="chats">
         <!-- Message container -->
-        <div class="msg-page" id="messages">
+        <div class="msg-page"  id="messages">
           <% messages.forEach((msg) => { %>
             <% if (msg.userId == 2) { %>
                 <div class="received-chats">
@@ -21,7 +21,7 @@
                             <p>
                                 <%= msg.message %>
                                 <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString() %></span>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US') %></span>
                             </p>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <p class="multi-msg">
                                 <%= msg.message %>
                                 <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString() %></span>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US') %></span>
                             </p>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
       </div>
     </div>
   </div>
-  <div class="msg-bottom"  >
+  <div class="msg-bottom"  style="position: sticky; bottom: 60px; width: 100%; padding: 0px 5px 5px 0px;">
     <div class="input-group"  >
       <form action="" id="form" style=" flex: 1;padding: 0px 10px 0px 20px;">
-        <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem;"  placeholder="Write message..." />
-        <button style="padding: 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem;">Send</button>
+        <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem; padding: 5px 0px 5px 5px;"  placeholder="Write message..." />
+        <button style="padding: 10px 20px 10px 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem;">Send</button>
       </form>
 
 
@@ -105,7 +105,7 @@
                 <p>
                 ${msg.message}
                 <br>
-                <span class="time">${new Date(msg.createdAt).toLocaleTimeString()}</span>
+                <span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US')}</span>
                 </p>
               </div>
             </div>
