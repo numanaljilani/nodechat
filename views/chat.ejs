@@ -21,7 +21,15 @@
                             <p>
                                 <%= msg.message %>
                                 <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US') %></span>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            }) %></span>
                             </p>
                         </div>
                     </div>
@@ -33,7 +41,15 @@
                             <p class="multi-msg">
                                 <%= msg.message %>
                                 <br>
-                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US') %></span>
+                                <span class="time"><%= new Date(msg.createdAt).toLocaleTimeString('en-US',{
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            }) %></span>
                             </p>
                         </div>
                     </div>
@@ -47,9 +63,9 @@
       </div>
     </div>
   </div>
-  <div class="msg-bottom"  style="position: sticky; bottom: 60px; width: 100%; padding: 0px 5px 5px 0px;">
+  <div class="msg-bottom"  style="position: sticky; bottom: 60px; width: 100%; padding: 0px 5px 5px 0px; overflow: hidden;">
     <div class="input-group"  >
-      <form action="" id="form" style=" flex: 1;padding: 0px 10px 0px 20px;">
+      <form action="" id="form" style=" flex: 1;padding: 0px 10px 0px 20px; overflow: hidden;">
         <input type="text" id="input" class="form-control" style="flex: 1;font-size: 1.0rem; padding: 5px 0px 5px 5px;"  placeholder="Write message..." />
         <button style="padding: 10px 20px 10px 20px; border: none; border-radius: 5px; background-color: #2970FD; color: #fff; cursor: pointer; font-size: 0.9rem;">Send</button>
       </form>
@@ -105,7 +121,15 @@
                 <p>
                 ${msg.message}
                 <br>
-                <span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US')}</span>
+                <span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US',{
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            })}</span>
                 </p>
               </div>
             </div>
